@@ -48,9 +48,9 @@ export default {
     login() {
       ServiceCubos.getToken(this.user).then((response) => {
         console.log(response);
-        localStorage.setItem('bearer_token', 'Bearer' + response);
+        localStorage.setItem('bearer_token', response);
         this.$emit('updateLoginStatus', true)
-        this.$router.push('/');
+        this.$router.push('/perfil');
       });
     },
   },

@@ -16,6 +16,26 @@ class ServiceCubos {
 
     }
 
+    getCompras() {
+        return new Promise((resolve) => {
+            let request = "/api/Compra/ComprasUsuario";
+            let url = Global.urlCubos + request;
+            let token = localStorage.getItem('bearer_token');
+            let config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            axios
+            .get(url, config)
+            .then(response => {
+                this.compras = response.data;
+                resolve(this.compras);   
+            })
+        })
+
+    }
+
     getCubosMarca(marca) {
         return new Promise(function (resolve) {
             let cubos = [];
@@ -76,19 +96,46 @@ class ServiceCubos {
     }
 
 
-    getPerfil(){
+    getPerfil() {
         return new Promise((resolve) => {
             let request = "api/Manage/PerfilUsuario";
-            let headers = {
-                'Authorization': 'Bearer ' + localStorage.getItem('bearer_token'),
-                'Content-Type': 'application/json'
+            let token = localStorage.getItem('bearer_token');
+            let config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
             };
-            console.log(localStorage.getItem('bearer_token'));
-            axios.get(Global.urlCubos + request, {headers: headers}).then(response => {
-                resolve(response.data);
-            })
+            axios.get(Global.urlCubos + request, config)
+                .then(response => {
+                    resolve(response.data);
+                })
+        });
+    }
+
+    insertPedido(pedido) {
+        return new Promise((resolve) => {
+            let request = `/api/Compra/InsertarPedido/${idCubo}`;
+            let token = localStorage.getItem('bearer_token');
+            let config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            let pedido = {
+                idCubo: pedido.idCubo,
+                idPedido: pedido.idPedido,
+                idUsuario: pedido.idUsuario,
+                fechaPedido: pedido.fechaPedido
+            };
+            axios.post(Global.urlCubos + request, pedido, config)
+                .then(response => {
+                    resolve(response.data);
+                })
         })
     }
+
 
 }
 export default new ServiceCubos();

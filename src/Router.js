@@ -5,7 +5,8 @@ import CubosComponent from "./components/CubosComponent.vue";
 import SesionComponent from "./components/SesionComponent.vue";
 import RegistroComponent from "./components/RegistroComponent.vue";
 import PerfilComponent from "./components/PerfilComponent.vue";
-
+import PedidosComponent from "./components/PedidosComponent.vue";
+import ComprasComponent from "./components/ComprasComponent.vue";
 const myRoutes = [
     {
         path: "/", component: HomeComponent
@@ -24,6 +25,12 @@ const myRoutes = [
     },
     {
         path: "/perfil", component: PerfilComponent
+    },
+    {
+        path: "/pedidos", component: PedidosComponent
+    },
+    {
+        path: "/compras", component: ComprasComponent
     }
 ]
 const router = createRouter({

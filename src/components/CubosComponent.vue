@@ -2,9 +2,9 @@
     <div class="container">
         <h1>Cubos de la marca {{ this.$route.params.marca }}</h1>
         <hr style="color: red;" />
-        <div v-for="cubo in cubos" :key="cubo.idCubo">
-            <div class="card" style="width: 150px;">
-                <img class="card-img-top" :src="cubo.imagen" style="width: 100px;" alt="Card image cap">
+        <div class="card-container">
+            <div v-for="cubo in cubos" :key="cubo.idCubo" class="card">
+                <img class="card-img-top" :src="cubo.imagen" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ cubo.nombre }}</h5>
                     <p class="card-text">{{ cubo.precio }}</p>
@@ -43,4 +43,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.card {
+  width: calc(50% - 8px); 
+  margin-bottom: 16px;
+}
+
+.card-img-top {
+  width: 150px;
+  height: auto;
+}</style>
